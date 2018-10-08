@@ -6,7 +6,7 @@
 
 ## 使用
 
-引用依赖，mdui、vue、threejs、camera-controljs
+引用依赖，mdui、vue、threejs、camera-control-js
 ```html
 <link rel="stylesheet" href="//cdnjs.loli.net/ajax/libs/mdui/0.4.1/css/mdui.min.css">
 <script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
