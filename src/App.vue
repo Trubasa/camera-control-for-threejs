@@ -83,7 +83,6 @@ export default {
   position: fixed;
   top: 0;
   bottom: 0;
-  background-color: rgb(255, 255, 255);
   padding: 10px;
 }
 body,html{

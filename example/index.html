@@ -7,7 +7,7 @@
     <script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="../static/three.js/three.js"></script>
-    <script src="../dist/camera-control.js"></script>
+
     <style>
       #app{
         position: fixed;
@@ -19,10 +19,9 @@
     </style>
   </head>
   <body>
-    <div id="app">
-      <camera-control :camera="camera"></camera-control>
-    </div>
+
   </body>
+  <script src="../dist/camera-control.js"></script>
   <script>
     var scene=null;  //场景
     var camera=null;     // 相机
@@ -64,14 +63,14 @@
     changing()
     render();
 
-
-    var app=new Vue({
+    window.$initVue(camera)
+    /*var app=new Vue({
       el:"#app",
       data(){
         return {
           camera:camera,
         }
       }
-    })
+    })*/
   </script>
 </html>
