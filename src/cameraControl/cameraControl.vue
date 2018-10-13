@@ -10,6 +10,10 @@
         </div>
         <div class="mdui-panel-item-body">
           <div class="mdui-textfield">
+            <label class="mdui-textfield-label">fov</label>
+            <input class="mdui-textfield-input" type="number"  v-model="camera.fov" @change="cameraUpdate"/>
+          </div>
+          <div class="mdui-textfield">
             <label class="mdui-textfield-label">position.x</label>
             <input class="mdui-textfield-input" type="number" v-model="camera.position.x"/>
           </div>
@@ -23,15 +27,15 @@
           </div>
           <div class="mdui-textfield">
             <label class="mdui-textfield-label">up.x</label>
-            <input class="mdui-textfield-input" type="number" v-model="camera.up.x"/>
+            <input class="mdui-textfield-input" type="number" v-model="camera.up.x" @change="cameraUpdate"/>
           </div>
           <div class="mdui-textfield">
             <label class="mdui-textfield-label">up.y</label>
-            <input class="mdui-textfield-input" type="number" v-model="camera.up.y"/>
+            <input class="mdui-textfield-input" type="number" v-model="camera.up.y" @change="cameraUpdate"/>
           </div>
           <div class="mdui-textfield">
             <label class="mdui-textfield-label">up.z</label>
-            <input class="mdui-textfield-input" type="number" v-model="camera.up.z"/>
+            <input class="mdui-textfield-input" type="number" v-model="camera.up.z" @change="cameraUpdate"/>
           </div>
           <div class="mdui-textfield">
             <label class="mdui-textfield-label">lookAt</label>
@@ -76,16 +80,65 @@
             x:0,
             y:0,
             z:0
+          },
+          position:{
+            x:0,
+            y:0,
+            z:0
+          },
+          up:{
+            x:0,
+            y:0,
+            z:0
           }
         }
       },
       watch:{
-        lookAtParam(val){
-          this.renderer.lookAt(val.x,val.y,val.z);
+        'up':{
+          handler:function (val) {
+            console.log('upChange',val);
+            val.x=parseFloat(val.x);
+            val.y=parseFloat(val.y);
+            val.z=parseFloat(val.z);
+             this.settingChange('up',val)
+          },
+          deep: true
+        },
+        'lookAtParam':{
+          handler:function (val) {
+            console.log('lookAtParam');
+            this.camera.lookAt(this.lookAtParam.x,this.lookAtParam.y,this.lookAtParam.z);
+          },
+          deep: true
         }
       },
       mounted(){
 
+      },
+      methods:{
+        lookAt(){
+          // console.log('lookAt');
+          // this.camera.lookAt(this.lookAtParam.x,this.lookAtParam.y,this.lookAtParam.z);
+        },
+        cameraUpdate(){
+          this.camera.updateProjectionMatrix();
+        },
+        makeData(data){ //构造settingChange接受的数据结构
+          var obj={
+            target:{
+              value:data
+            }
+          }
+          return obj;
+        },
+        settingChange(key,val){
+          this.camera[key]=val
+          this.cameraUpdate();
+        },
+        fovChange(){
+
+          this.cameraUpdate();
+        }
       }
     }
 </script>

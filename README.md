@@ -15,9 +15,10 @@
 <script src="../dist/camera-control.js"></script>
 ```
 
-标签
-```html
- <camera-control :camera="camera"></camera-control>
+使用
+```javascript
+window.$utils.makeDom(); //创建操作面板标签
+window.$utils.initVue(camera);  //初始化vue实例
 ```
 
 实际使用请参考example目录下的index.html

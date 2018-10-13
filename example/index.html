@@ -7,21 +7,11 @@
     <script src="//cdnjs.loli.net/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
     <script src="../static/three.js/three.js"></script>
-
-    <style>
-      #app{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        background-color: rgb(255, 255, 255);
-        padding: 10px;
-      }
-    </style>
+    <script src="../dist/camera-control.js"></script>
   </head>
   <body>
 
   </body>
-  <script src="../dist/camera-control.js"></script>
   <script>
     var scene=null;  //场景
     var camera=null;     // 相机
@@ -30,6 +20,8 @@
       scene=new THREE.Scene();
       camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
       camera.position.z = 5;
+      camera.up.y=2;
+      camera.lookAt(0,0,1)
       renderer=new THREE.WebGLRenderer({
         antialias: true //抗锯齿
       });
@@ -63,14 +55,7 @@
     changing()
     render();
 
-    window.$initVue(camera)
-    /*var app=new Vue({
-      el:"#app",
-      data(){
-        return {
-          camera:camera,
-        }
-      }
-    })*/
+    window.$utils.makeDom(); //创建操作面板标签
+    window.$utils.initVue(camera);  //初始化vue实例
   </script>
 </html>
